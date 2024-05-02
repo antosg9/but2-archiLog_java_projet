@@ -11,9 +11,16 @@ public class Dvd extends AbstractDocument{
 		super(numero, titre);
 		this.adulte=adulte;
 	}
-
+	
+	private boolean adulte() {
+		if(adulte)
+			System.out.println("Réservé aux plus de 16 ans !");
+		return adulte;
+	}
 	@Override
 	public void reservation(Abonne ab) {
+		if(adulte())
+			return;
 		// TODO Auto-generated method stub
 		
 	}
