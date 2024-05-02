@@ -1,4 +1,6 @@
-package mediateque;
+package document;
+
+import main.Abonne;
 
 public interface Document {
 	int numero();

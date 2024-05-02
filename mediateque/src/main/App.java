@@ -1,4 +1,4 @@
-package mediateque;
+package main;
 
 public class App {
 
