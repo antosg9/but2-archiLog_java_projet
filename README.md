@@ -5,4 +5,3 @@ Education : BUT2 computer science (University Bachelor of Technology in Computer
 Subject : Java software architecture
 
 Description : A team project on Java software architecture [on threads, sockets and more in Java language].
-.
