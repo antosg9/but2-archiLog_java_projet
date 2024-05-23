@@ -4,18 +4,19 @@ import main.Abonne;
 
 public abstract class AbstractDocument implements Document{
 	
-	private int numero;
+	private int numeroDocument;
+	private static int compteurDocument;
 	private String titre;
 	
-	public AbstractDocument(int numero, String titre)
+	public AbstractDocument(String titre)
 	{
-		this.numero=numero;
+		this.numero=compteurDocument++;
 		this.titre=titre;
 	}
 	
 	@Override
-	public int numero() {
-		return this.numero;
+	public int getNumeroDocument() {
+		return this.numeroDocument;
 	}
 
 	@Override

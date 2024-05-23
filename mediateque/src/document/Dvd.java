@@ -6,15 +6,15 @@ public class Dvd extends AbstractDocument{
 	
 	private boolean adulte;
 	
-	public Dvd(int numero, String titre, boolean adulte)
+	public Dvd(String titre, boolean adulte)
 	{
-		super(numero, titre);
+		super(titre);
 		this.adulte=adulte;
 	}
 	
 	private boolean adulte() {
 		if(adulte)
-			System.out.println("Réservé aux plus de 16 ans !");
+			System.out.println("Réservé aux plus de 18 ans !");
 		return adulte;
 	}
 	@Override
