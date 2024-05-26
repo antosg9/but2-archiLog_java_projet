@@ -1,6 +1,6 @@
 package document;
 
-import main.Abonne;
+import abonne.Abonne;
 
 public interface Document {
 	int numero();

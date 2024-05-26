@@ -1,21 +1,23 @@
 package document;
 
-import main.Abonne;
+import abonne.Abonne;
 
 public abstract class AbstractDocument implements Document{
 	
-	private int numero;
+	private int numeroDocument;
+	private static int compteurDocument;
 	private String titre;
+	private String type; //Type de document livre dvd ou autre
 	
-	public AbstractDocument(int numero, String titre)
+	public AbstractDocument(String titre)
 	{
-		this.numero=numero;
+		this.numeroDocument=compteurDocument++;;
 		this.titre=titre;
 	}
 	
 	@Override
 	public int numero() {
-		return this.numero;
+		return this.numeroDocument;
 	}
 
 	@Override
@@ -26,7 +28,7 @@ public abstract class AbstractDocument implements Document{
 
 	@Override
 	public void retour() {
-		// TODO Auto-generated method stub
+		// Même méthode pour tout le monde
 	}
 
 }
