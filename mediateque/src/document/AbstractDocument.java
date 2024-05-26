@@ -9,10 +9,11 @@ public abstract class AbstractDocument implements Document{
 	private String titre;
 	private String type; //Type de document livre dvd ou autre
 	
-	public AbstractDocument(String titre)
+	public AbstractDocument(String titre, String type)
 	{
 		this.numeroDocument=compteurDocument++;;
 		this.titre=titre;
+		this.type=type;
 	}
 	
 	@Override

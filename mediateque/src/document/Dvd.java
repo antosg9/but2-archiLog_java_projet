@@ -8,7 +8,7 @@ public class Dvd extends AbstractDocument{
 	
 	public Dvd(String titre, boolean adulte)
 	{
-		super(titre);
+		super(titre,Dvd.class.getSimpleName());
 		this.adulte=adulte;
 	}
 	
