@@ -5,6 +5,7 @@ public class ServiceReservation extends AbstractService {
 	@Override
 	public void run() {
 		try {
+			super.openFlow();
 			String request;
 
 			while(true) 

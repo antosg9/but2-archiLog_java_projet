@@ -14,13 +14,7 @@ public abstract class AbstractService implements Service, Runnable{
 	private BufferedReader socketIn;
 	private PrintWriter socketOut;
 
-	AbstractService(){
-		try {
-			this.openFlow();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	AbstractService(){}
 
 	protected void openFlow() throws Exception
 	{

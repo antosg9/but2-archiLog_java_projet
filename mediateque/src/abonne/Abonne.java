@@ -2,19 +2,24 @@ package abonne;
 
 public class Abonne{
 	private String nom;
+	private String dateNaiss; //Calculer l'âge à partir de la date de naissance et //ajouter un timer task qui s'éxecute tous les ans
 	private int age;
 	private int numero;
-	private String dateNaiss; //Calculer l'âge à partir de la date de naissance et //ajouter un timer task qui s'éxecute tous les ans
 	
 	private static final int ageAdult = 16;
 	private static int compteurIdAbonne = 1; //ID différent pour chaque abonné
 	
-	private String emprunts[]; //Tableau pour stocker les emprunts ?
-
-	public Abonne(String nom, int age){
+	public Abonne(String nom, String dateNaiss) throws Exception{
 		this.nom = nom;
-		this.age = age; //A terme le constructeur sera nom et dateNaiss
+		this.dateNaiss=dateNaiss;
 		this.numero = Abonne.compteurIdAbonne++;
+		
+		try {
+			this.age = Age.getAge(this.dateNaiss);
+		} catch (Exception e) {
+			throw new Exception("Calcul de l'âge invalide !");
+		} 
+		
 	}
 
 	public int getIdAbone(){
@@ -23,6 +28,11 @@ public class Abonne{
 	
 	public boolean isAdult(){
 		return (this.age >= Abonne.ageAdult);
+	}
+	
+	public int getAge()
+	{
+		return this.age;
 	}
 
 }

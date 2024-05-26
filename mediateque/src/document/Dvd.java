@@ -4,7 +4,7 @@ import abonne.Abonne;
 
 public class Dvd extends AbstractDocument{
 	
-	private boolean adulte;
+	private boolean adulte; //True interdit aux mineurs
 	
 	public Dvd(String titre, boolean adulte)
 	{
@@ -12,21 +12,27 @@ public class Dvd extends AbstractDocument{
 		this.adulte=adulte;
 	}
 	
-	private boolean getAdulte() {
-		if(this.adulte)
-			System.out.println("Réservé aux plus de 16 ans !");
-		return this.adulte;
+	private boolean isAdult(Abonne ab)
+	{
+		if(this.adulte && !ab.isAdult())
+		{
+			System.out.println("Vous n’avez pas l’âge pour ce DVD !");
+			return false;
+		}
+		
+		return true;
 	}
+	
 	@Override
 	public void reservation(Abonne ab) {
-		if(this.adulte && !(ab.isAdult()))
-			System.out.println("Emprunt interdit aux mineurs !");
-		// TODO Auto-generated method stub
+		if(isAdult(ab))
+			super.reservation(ab);
 	}
 
 	@Override
 	public void emprunt(Abonne ab) {
-		// TODO Auto-generated method stub
+		if(isAdult(ab))
+			super.emprunt(ab);
 		
 	}
 
