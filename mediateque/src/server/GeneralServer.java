@@ -1,6 +1,6 @@
 package server;
 
-import service.Service_Lambda;
+import service.*;
 
 public class GeneralServer extends Thread {
 	
@@ -11,8 +11,8 @@ public class GeneralServer extends Thread {
 
 	public void run()
 	{
-		Server reservations = new Server(3000, Service_Lambda.class);
-		Server emprunts = new Server(4000, Service_Lambda.class);
-		Server retours = new Server(5000, Service_Lambda.class);
+		Server reservation = new Server(3000, ServiceReservation.class);
+		Server emprunt = new Server(4000, ServiceEmprunt.class);
+		Server retour = new Server(5000, ServiceRetour.class);
 	}
 }

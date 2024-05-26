@@ -9,7 +9,7 @@ public class ServiceReservation extends AbstractService {
 
 			while(true) 
 			{
-				super.sendRequest("Combien de places souhaitez vous réserver ?");
+				super.sendRequest("Saisissez le numéro du document à réserver : ");
 				request = super.receiveRequest();
 
 				if(request.equalsIgnoreCase("exit"))
@@ -19,7 +19,7 @@ public class ServiceReservation extends AbstractService {
 					return;
 				}
 
-				//int numberAsked=Integer.parseInt(request); //Récupérer un nombre
+				int numberAsked=Integer.parseInt(request); //Récupérer un nombre
 				request = "Pong"; //Ce qu'on veut renvoyer comme donnée
 
 				super.sendRequest(request); //Envoi de la donnée
