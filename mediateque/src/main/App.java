@@ -1,8 +1,10 @@
 package main;
 
+import server.GeneralServer;
+
 public class App {
 
 	public static void main(String[] args) {
-		//To-Do
+		GeneralServer s = new GeneralServer();
 	}
 }
