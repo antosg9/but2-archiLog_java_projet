@@ -6,9 +6,9 @@ public class Dvd extends AbstractDocument{
 	
 	private boolean adulte; //True interdit aux mineurs
 	
-	public Dvd(String titre, boolean adulte)
+	public Dvd(int numDocument, String titre, String type, int numAbo, String stateBase, boolean adulte)
 	{
-		super(titre,Dvd.class.getSimpleName());
+		super(numDocument, titre, Dvd.class.getSimpleName(), numAbo, stateBase);
 		this.adulte=adulte;
 	}
 	

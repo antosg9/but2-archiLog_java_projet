@@ -6,30 +6,31 @@ public class ServiceEmprunt extends AbstractService {
 	public void run() {
 		try {
 			super.openFlow();
-			String request;
+			String login = "EMPRUNT - Veuillez saisir \"numéro_abonné ; numéro_document\"";
 
-			while(true) 
+			while(true)
 			{
-				super.sendRequest("Saisissez le numéro du document à emprunter : ");
-				request = super.receiveRequest();
-
-				if(request.equalsIgnoreCase("exit"))
-				{
-					//Fermeture des flux
-					super.closeFlow();
+				String response = logAndDoc(login);
+				if(response.equalsIgnoreCase("exit")) //Ârrêt du service
 					return;
-				}
+				else if(response.equalsIgnoreCase("error")) //Format invalide, on recommence
+					continue;
+				
+				int[] aboAndDoc = super.parseLogAndDoc(response);
+				
+				this.emprunter(aboAndDoc[0],aboAndDoc[1]);
 
-				int numberAsked=Integer.parseInt(request); //Récupérer un nombre
-				request = "Pong"; //Ce qu'on veut renvoyer comme donnée
-
-				super.sendRequest(request); //Envoi de la donnée
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	private String emprunter(int num, int numAbo)
+	{
+		return "Document emprunté avec succés !";
 	}
 
 }

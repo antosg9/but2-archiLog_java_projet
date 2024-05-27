@@ -1,35 +1,69 @@
 package service;
 
+import java.io.IOException;
+
 public class ServiceRetour extends AbstractService {
 
 	@Override
 	public void run() {
 		try {
-			super.openFlow();	
-			String request;
-
-			while(true) 
+			super.openFlow();
+			String message = "À RENDRE - Veuillez saisir \"numéro_document\"";
+			
+			while(true)
 			{
-				super.sendRequest("Saisissez le numéro du document à retourner : ");
-				request = super.receiveRequest();
-
-				if(request.equalsIgnoreCase("exit"))
-				{
-					//Fermeture des flux
-					super.closeFlow();
+				String response = this.pingPongReturn(message);
+				
+				if(response.equalsIgnoreCase("exit")) //Ârrêt du service
 					return;
-				}
+				else if(response.equalsIgnoreCase("error")) //Format invalide, on recommence
+					continue;
 
-				int numberAsked=Integer.parseInt(request); //Récupérer un nombre
-				request = "Pong"; //Ce qu'on veut renvoyer comme donnée
+				int numDoc = Integer.parseInt(response);
 
-				super.sendRequest(request); //Envoi de la donnée
+				this.retourner(numDoc);
+				//PENSER à renvoyer réponse au client !!!!
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+	
+	private String retourner(int numDoc)
+	{
+		return "Document retourné avec succés !";
+	}
+	
+	private String pingPongReturn(String message) throws IOException
+	{
+		super.sendRequest(message);
+		String request = super.receiveRequest().trim();
+		String error = "error";
+		
+		if(request.equalsIgnoreCase("exit")) //Arrêt du service
+		{
+			//Fermeture des flux
+			this.closeFlow();
+			return request.toLowerCase();
+		}
+		
+		if(!(request.chars().allMatch(Character::isDigit)))
+		{
+			this.sendRequest("Mauvais format !"); //Erreur du client
+			return error; //Demande de nouvelle valeur
+		}
+
+		int numDoc = Integer.parseInt(request);
+		
+		if(numDoc<=0)
+		{
+			this.sendRequest("Mauvais nombre !"); //Erreur du client
+			return error; //Demande de nouvelle valeur
+		}
+
+		return request;
 	}
 
 }
