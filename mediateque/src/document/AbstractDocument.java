@@ -5,46 +5,44 @@ import document.state.*;
 
 public abstract class AbstractDocument implements Document{
 
-	private int numDocument;
+	private int numDoc;
 	private	int numAbo;
 	private String titre;
-	private String type; //Type de document livre dvd ou autre
-	private State state;
+	private String typeDoc;
+	private State stateDoc;
 
-
-	public AbstractDocument(int numDocument, String titre, String type, int numAbo, String stateBase)
+	public AbstractDocument(int numDoc, String titre, String typeDoc, int numAbo, String stateBase)
 	{
-		this.numDocument=numDocument;
+		this.numDoc=numDoc;
 		this.titre=titre;
-		this.type=type;
+		this.typeDoc=typeDoc;
 		this.numAbo=numAbo;
-		
-		
+
 		//Récupération de l'état du document
 		if(stateBase.equalsIgnoreCase("Disponible"))
-			this.state= new DisponibleState(this);
+			this.stateDoc= new DisponibleState(this);
 		else if(stateBase.equalsIgnoreCase("Réservé"))
-			this.state = new ReserveState(this);
+			this.stateDoc = new ReserveState(this);
 		else if(stateBase.equalsIgnoreCase("Emprunté"))
-			this.state = new EmprunteState(this);
+			this.stateDoc = new EmprunteState(this);
 	}
 
 	public void setState(State state)
 	{
-		this.state=state;
+		this.stateDoc=state;
 	}
 
 	@Override
 	public int numero() {
-		return this.numDocument;
+		return this.numDoc;
 	}
 
 	@Override
 	public void reservation(Abonne ab)
 	{
-		if(state.getStateName().equals("Disponible"))
+		System.out.println(stateDoc.reserver());
+		if(stateDoc.getStateName().equals("Disponible"))
 		{
-			state.reserver();
 			this.numAbo=ab.getNumAbo();
 		}
 	};
@@ -52,20 +50,19 @@ public abstract class AbstractDocument implements Document{
 	@Override
 	public void emprunt(Abonne ab)
 	{
-		if(state.getStateName().equals("Disponible")||(state.getStateName().equals("Réservé")&&ab.getNumAbo()==numAbo))
+		System.out.println(stateDoc.emprunter());
+		if(stateDoc.getStateName().equals("Disponible")||(stateDoc.getStateName().equals("Réservé")&&ab.getNumAbo()==numAbo))
 		{
-			state.emprunter();
 			this.numAbo=ab.getNumAbo();
 		}
 	};
 
 	@Override
 	public void retour() {
-		if(state.getStateName().equals("Emprunté"))
+		System.out.println(stateDoc.rendre());
+		if(stateDoc.getStateName().equals("Emprunté"))
 		{
-			state.rendre();
 			this.numAbo=0;
 		}
 	}
-
 }

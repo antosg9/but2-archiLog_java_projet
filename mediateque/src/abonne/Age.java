@@ -1,26 +1,33 @@
 package abonne;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 class Age {
 
-	public static int getAge(String strDateNaiss) throws Exception
-	{
-		DateTimeFormatter formateur = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate dateActuelle = LocalDate.now();
-		LocalDate dateNaiss;
-		try {
-			dateNaiss = LocalDate.parse(strDateNaiss, formateur);
-		} catch (Exception e) {
-			throw new Exception("Rentrez une date valide au format dd/MM/yyyy !");
-		}
+	static int getAge(Date dateNaiss) {
+		
+		Date dateActuelle = new Date();
 
-		if ((dateNaiss != null) && (dateActuelle != null) && dateNaiss.isBefore(dateActuelle)) {
-			return Period.between(dateNaiss, dateActuelle).getYears();
+		if ((dateNaiss != null) && (dateActuelle != null) && dateNaiss.before(dateActuelle)) {
+			Calendar birth = Calendar.getInstance();
+			birth.setTime(dateNaiss);
+			Calendar today = Calendar.getInstance();
+			today.setTime(dateActuelle);
+
+			int yearDifference = today.get(Calendar.YEAR) - birth.get(Calendar.YEAR);
+			int monthDifference = today.get(Calendar.MONTH) - birth.get(Calendar.MONTH);
+			int dayDifference = today.get(Calendar.DAY_OF_MONTH) - birth.get(Calendar.DAY_OF_MONTH);
+
+			if (monthDifference < 0 || (monthDifference == 0 && dayDifference < 0)) {
+				yearDifference--;
+			}
+
+			return yearDifference;
+
 		} else {
-			throw new Exception("Rentrez une date valide !");
+			System.out.println("Rentrez une date valide !");
+			return 0;
 		}
 	}
 }

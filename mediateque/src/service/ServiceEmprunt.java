@@ -17,20 +17,18 @@ public class ServiceEmprunt extends AbstractService {
 					continue;
 				
 				int[] aboAndDoc = super.parseLogAndDoc(response);
-				
 				this.emprunter(aboAndDoc[0],aboAndDoc[1]);
-
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
-	private String emprunter(int num, int numAbo)
+	private String emprunter(int num, int numAbo) throws Exception
 	{
-		return "Document emprunté avec succés !";
+		super.listeDocument.findDoc(num).emprunt(super.listeAbonne.findAbo(numAbo));
+		return "-";
 	}
 
 }

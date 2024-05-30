@@ -7,12 +7,18 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import stockage.ListeAbonne;
+import stockage.ListeDocument;
+
 public abstract class AbstractService implements Service, Runnable{
 
 	private Socket clientSocket=null;
 	private String clientName;
 	private BufferedReader socketIn;
 	private PrintWriter socketOut;
+	
+	protected ListeDocument listeDocument = ListeDocument.getInstance();
+	protected ListeAbonne listeAbonne = ListeAbonne.getInstance();
 
 	AbstractService(){}
 

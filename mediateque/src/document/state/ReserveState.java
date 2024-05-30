@@ -23,5 +23,4 @@ public class ReserveState extends State{
 	public String rendre() {
 		return "Ce document , n'est pas rendable !";
 	}
-
 }
