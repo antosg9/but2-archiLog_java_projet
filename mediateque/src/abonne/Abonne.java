@@ -1,28 +1,28 @@
 package abonne;
 
+import java.util.Date;
+
 public class Abonne{
+
+	private int numAbo;
 	private String nom;
+	private Date dateNaiss; //ajouter un timer task qui s'éxecute tous les ans?
 	private int age;
-	private int numero;
-	private String dateNaiss; //Calculer l'âge à partir de la date de naissance et //ajouter un timer task qui s'éxecute tous les ans
-	
+
 	private static final int ageAdult = 16;
-	private static int compteurIdAbonne = 1; //ID différent pour chaque abonné
-	
-	private String emprunts[]; //Tableau pour stocker les emprunts ?
 
-	public Abonne(String nom, int age){
+	public Abonne(int numAbo, String nom, Date dateNaiss){
+		this.numAbo = numAbo;
 		this.nom = nom;
-		this.age = age; //A terme le constructeur sera nom et dateNaiss
-		this.numero = Abonne.compteurIdAbonne++;
+		this.dateNaiss=dateNaiss;
+		this.age=Age.getAge(dateNaiss);
 	}
 
-	public int getIdAbone(){
-		return this.numero;
+	public int getNumAbo(){
+		return this.numAbo;
 	}
-	
+
 	public boolean isAdult(){
 		return (this.age >= Abonne.ageAdult);
 	}
-
 }

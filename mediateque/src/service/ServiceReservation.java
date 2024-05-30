@@ -5,30 +5,32 @@ public class ServiceReservation extends AbstractService {
 	@Override
 	public void run() {
 		try {
-			String request;
+			super.openFlow();
+			String login = "RESERVATION - Veuillez saisir \"numéro_abonné ; numéro_document\"";
 
-			while(true) 
+			while(true)
 			{
-				super.sendRequest("Saisissez le numéro du document à réserver : ");
-				request = super.receiveRequest();
-
-				if(request.equalsIgnoreCase("exit"))
-				{
-					//Fermeture des flux
-					super.closeFlow();
+				String response = logAndDoc(login);
+				if(response.equalsIgnoreCase("exit")) //Ârrêt du service
 					return;
-				}
+				else if(response.equalsIgnoreCase("error")) //Format invalide, on recommence
+					continue;
 
-				int numberAsked=Integer.parseInt(request); //Récupérer un nombre
-				request = "Pong"; //Ce qu'on veut renvoyer comme donnée
+				int[] aboAndDoc = super.parseLogAndDoc(response);
 
-				super.sendRequest(request); //Envoi de la donnée
+				this.reserver(aboAndDoc[0],aboAndDoc[1]);
+				//PENSER à renvoyer réponse au client !!!!
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	private String reserver(int numAbo, int numDoc)
+	{
+		return "Document réservé avec succés !";
 	}
 
 }
