@@ -1,5 +1,8 @@
 package service;
 
+import abonne.Abonne;
+import document.AbstractDocument;
+
 public class ServiceReservation extends AbstractService {
 
 	@Override
@@ -18,19 +21,30 @@ public class ServiceReservation extends AbstractService {
 
 				int[] aboAndDoc = super.parseLogAndDoc(response);
 
-				this.reserver(aboAndDoc[0],aboAndDoc[1]);
-				//PENSER à renvoyer réponse au client !!!!
+				response = this.reserver(aboAndDoc[0],aboAndDoc[1]);
+				super.sendRequest(response);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
-	private String reserver(int numAbo, int numDoc)
+	private String reserver(int numAbo, int numDoc) throws Exception
 	{
-		return "Document réservé avec succés !";
-	}
+		String response;
+		AbstractDocument document = super.listeDocument.findDoc(numDoc);
+		Abonne abonne = super.listeAbonne.findAbo(numAbo);
+		
+		if(document.seeState().equalsIgnoreCase("Disponible"))
+			response = "Document réservé avec succès";
+		else if(document.seeState().equalsIgnoreCase("Réservé"))
+			response = "Document déjà réservé !";
+		else
+			response = "Document déjà emprunté!";
+		
+		document.reservation(abonne);
 
+		return response;
+	}
 }
