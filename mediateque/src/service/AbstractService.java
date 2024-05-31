@@ -80,7 +80,7 @@ public abstract class AbstractService implements Service, Runnable{
 			return request.toLowerCase();
 		}
 
-		String[] subInput =request.split(";");
+		String[] subInput =request.split(":");
 
 		if(subInput.length>2)
 		{
@@ -117,7 +117,7 @@ public abstract class AbstractService implements Service, Runnable{
 	//Retourne un tableau de int avec à l'index 0 le numéro Abonné et à l'index 1 le numéro document
 	protected int[] parseLogAndDoc(String s)
 	{
-		String subInput[] = s.split(";");
+		String subInput[] = s.split(":");
 		return new int[] {Integer.parseInt(subInput[0]),Integer.parseInt(subInput[1])};
 	}
 }

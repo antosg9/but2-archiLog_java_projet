@@ -26,10 +26,20 @@ public abstract class AbstractDocument implements Document{
 		else if(stateBase.equalsIgnoreCase("Emprunté"))
 			this.stateDoc = new EmprunteState(this);
 	}
+	
+	public String seeState()
+	{
+		return this.stateDoc.getStateName();
+	}
 
 	public void setState(State state)
 	{
 		this.stateDoc=state;
+	}
+	
+	public int getNumAbo()
+	{
+		return this.numAbo;
 	}
 
 	@Override

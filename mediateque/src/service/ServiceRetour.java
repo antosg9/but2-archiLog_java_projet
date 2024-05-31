@@ -2,6 +2,8 @@ package service;
 
 import java.io.IOException;
 
+import document.AbstractDocument;
+
 public class ServiceRetour extends AbstractService {
 
 	@Override
@@ -21,8 +23,8 @@ public class ServiceRetour extends AbstractService {
 
 				int numDoc = Integer.parseInt(response);
 
-				this.retourner(numDoc);
-				//PENSER à renvoyer réponse au client !!!!
+				response = this.retourner(numDoc);
+				super.sendRequest(response);
 			}
 
 		} catch (Exception e) {
@@ -31,9 +33,19 @@ public class ServiceRetour extends AbstractService {
 
 	}
 	
-	private String retourner(int numDoc)
+	private String retourner(int numDoc) throws Exception
 	{
-		return "Document retourné avec succés !";
+		String response;
+		AbstractDocument document = super.listeDocument.findDoc(numDoc);
+		
+		if(document.seeState().equalsIgnoreCase("Emprunté"))
+			response = "Document retourné avec succès";
+		else
+			response = "Document déjà retourné !";
+		
+		document.retour();
+
+		return response;
 	}
 	
 	private String pingPongReturn(String message) throws IOException
@@ -65,5 +77,4 @@ public class ServiceRetour extends AbstractService {
 
 		return request;
 	}
-
 }
