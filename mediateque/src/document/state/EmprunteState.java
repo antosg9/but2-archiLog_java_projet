@@ -11,17 +11,17 @@ public class EmprunteState extends State {
 
 	public String rendre() {
 		super.document.setState(new DisponibleState(super.document));
-		return "Document rendu avec succés !";
+		return " à été rendu avec succés ";
 	}
 
 	@Override
 	public String emprunter() {
-		return "Ce document est déjà emprunté !";
+		return " à tenté un emprunt impossible du document ";
 	}
 
 	@Override
 	public String reserver() {
-		return "Ce document n'est pas réservable !";
+		return " à tenté une réservation impossible du document ";
 	}
 
 }

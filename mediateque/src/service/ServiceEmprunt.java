@@ -34,9 +34,10 @@ public class ServiceEmprunt extends AbstractService {
 		String response;
 		AbstractDocument document = super.listeDocument.findDoc(numDoc);
 		Abonne abonne = super.listeAbonne.findAbo(numAbo);
-		
-		if(document.seeState().equalsIgnoreCase("Disponible")||(document.seeState().equalsIgnoreCase("Réservé")&&document.getNumAbo()==abonne.getNumAbo()))
+
+		if(document.seeState().equalsIgnoreCase("Disponible")||(document.seeState().equalsIgnoreCase("Réservé")&&(document.getNumAbo()==abonne.getNumAbo())))
 			response = "Document emprunté avec succès";
+
 		else
 			response = "Document déjà emprunté !";
 

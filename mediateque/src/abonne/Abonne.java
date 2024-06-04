@@ -6,7 +6,7 @@ public class Abonne{
 
 	private int numAbo;
 	private String nom;
-	private Date dateNaiss; //ajouter un timer task qui s'éxecute tous les ans?
+	private Date dateNaiss;
 	private int age;
 
 	private static final int ageAdult = 16;
@@ -24,5 +24,11 @@ public class Abonne{
 
 	public boolean isAdult(){
 		return (this.age >= Abonne.ageAdult);
+	}
+	
+	public String[] getTable()
+	{
+		String[] tableToReturn = {String.valueOf(this.numAbo),this.nom,String.valueOf(this.dateNaiss)};
+		return tableToReturn;
 	}
 }

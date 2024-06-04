@@ -12,19 +12,19 @@ public class DisponibleState extends State {
 	@Override
 	public String emprunter() {
 		super.document.setState(new EmprunteState(super.document));
-		return "Document emprunté avec succés !"; //A envoyer au serveur méthode sendData static service concerné
+		return " à emprunté avec succès le document n° "; //A envoyer au serveur méthode sendData static service concerné
 	}
 	
 	@Override
 	public String reserver()
 	{
 		super.document.setState(new ReserveState(super.document));
-		return "Document réservé avec succés !";
+		return " à réservé avec succès le document n° ";
 	}
 
 	@Override
 	public String rendre() {
-		return "Ce document est déjà rendu !";
+		return " à tenté un rendu impossible du document n° ";
 	}
 
 }
