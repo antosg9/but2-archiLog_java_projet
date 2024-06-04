@@ -9,6 +9,7 @@ import java.net.Socket;
 
 import stockage.ListeAbonne;
 import stockage.ListeDocument;
+import stockage.LogDocument;
 
 public abstract class AbstractService implements Service, Runnable{
 
@@ -48,7 +49,7 @@ public abstract class AbstractService implements Service, Runnable{
 		this.socketOut.println("Arrêt du service");
 		this.socketIn.close();		
 		this.socketOut.close();
-		System.out.println("Client disconnected : "+this.clientName);
+		LogDocument.getInstance().addLog("Client disconnected : "+this.clientName);
 		this.clientSocket.close();
 	}
 

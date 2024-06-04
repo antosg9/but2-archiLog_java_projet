@@ -2,6 +2,7 @@ package service;
 
 import abonne.Abonne;
 import document.AbstractDocument;
+import document.Dvd;
 
 public class ServiceReservation extends AbstractService {
 
@@ -9,7 +10,8 @@ public class ServiceReservation extends AbstractService {
 	public void run() {
 		try {
 			super.openFlow();
-			String login = "RESERVATION - Veuillez saisir \"numéro_abonné ; numéro_document\"";
+			String Catalogue;
+			String login = "RESERVATION - Veuillez saisir \"numéro_abonné : numéro_document\"";
 
 			while(true)
 			{
@@ -35,14 +37,17 @@ public class ServiceReservation extends AbstractService {
 		String response;
 		AbstractDocument document = super.listeDocument.findDoc(numDoc);
 		Abonne abonne = super.listeAbonne.findAbo(numAbo);
-		
+
 		if(document.seeState().equalsIgnoreCase("Disponible"))
-			response = "Document réservé avec succès";
+			if(document.getType().equalsIgnoreCase("DVD")&&!((Dvd)document).isAdult(abonne))
+				response = "Vous n'avez pas l'âge pour ce DVD !";
+			else
+				response = "Document réservé avec succès";
 		else if(document.seeState().equalsIgnoreCase("Réservé"))
-			response = "Document déjà réservé !";
+			response = "Document est déjà réservé jusqu'à "+document.getFinReservation();
 		else
 			response = "Document déjà emprunté!";
-		
+
 		document.reservation(abonne);
 
 		return response;

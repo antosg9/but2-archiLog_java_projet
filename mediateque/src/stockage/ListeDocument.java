@@ -56,4 +56,19 @@ public class ListeDocument {
 
 		throw new Exception("Élément introuvable");
 	}
+	
+	public void updateData() //Pour update les données
+	{
+		String[][] dataToUpdate = new String[this.liste.size()][6];
+		for(int i=0; i<this.liste.size();i++)
+		{
+			try {
+				dataToUpdate[i]=this.findDoc(i+1).getTable();
+			} catch (Exception e) {e.printStackTrace();}
+		}
+		
+		try {
+			ImportSql.getInstance().updateData("document", dataToUpdate);
+		} catch (SQLException e) {e.printStackTrace();}
+	}
 }

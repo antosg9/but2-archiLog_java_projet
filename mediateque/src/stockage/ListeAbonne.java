@@ -2,6 +2,7 @@ package stockage;
 
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -49,5 +50,20 @@ public class ListeAbonne{
 
 		throw new Exception("Fixe ça");
 	}
-
+	
+	public void updateData() //Pour update les données
+	{
+		String[][] dataToUpdate = new String[this.liste.size()][3];
+		for(int i=0; i<this.liste.size();i++)
+		{
+			try {
+				dataToUpdate[i]=this.findAbo(i+1).getTable();
+			} catch (Exception e) {e.printStackTrace();}
+		}
+		
+		try {
+			ImportSql.getInstance().updateData("abonne", dataToUpdate);
+		} catch (SQLException e) {e.printStackTrace();}
+	}
+	
 }
